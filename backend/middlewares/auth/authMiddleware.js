@@ -12,12 +12,8 @@ const authMiddleware = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    console.log(`token is ${token}`)
-
     try {
         const { _id, email } = verifyJWT(token)
-
-        console.log(`user is ${_id} ${email}`)
 
         const user = {
             _id,

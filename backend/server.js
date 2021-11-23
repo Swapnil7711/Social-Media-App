@@ -3,6 +3,13 @@ import { APP_PORT, DB_URL } from "./config/index.js"
 import router from "./routes/index.js"
 import errorHandler from "./middlewares/errorhandler.js";
 import mongoose from "mongoose";
+import bodyParser from "body-parser"
+import path from "path"
+
+
+global.APP_ROOT = path.resolve()
+
+console.log(APP_ROOT)
 
 const app = express();
 
@@ -21,7 +28,8 @@ db.once("open", () => {
 })
 
 // for form data parsing
-app.use(express.urlencoded())
+// app.use(bodyParser())
+app.use(express.urlencoded({ extended: false }))
 app.use("/api", router)
 app.get('/', (req, res) => { res.send(("hello from social app best")) })
 

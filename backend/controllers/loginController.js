@@ -79,9 +79,8 @@ export const loginController = {
 
             const result = await RefreshTokens.deleteOne({ refreshToken: req.body.refreshToken })
 
-            console.log(result)
-
             if (result.deletedCount < 1) {
+
                 return next(new Error("something went wrong in the databae"))
             }
 
