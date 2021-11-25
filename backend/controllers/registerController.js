@@ -25,7 +25,7 @@ export const registerController = {
             email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
             dob: joi.date().required(),
             password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-            confirmPassword: joi.ref('password').required(),
+            confirmPassword: joi.ref('password')
         });
 
         console.log(`body is ${JSON.stringify(req.body)}`)

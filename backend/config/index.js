@@ -7,5 +7,6 @@ export const {
     DEBUG_MODE,
     DB_URL,
     ACCESSTOKEN_SECRET,
-    REFRESHTOKEN_SECRET
+    REFRESHTOKEN_SECRET,
+    APP_URL
 } = process.env;

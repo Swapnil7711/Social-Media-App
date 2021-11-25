@@ -14,6 +14,9 @@ router.post('/logout', authMiddleware, loginController.logout)
 router.get('/profile', authMiddleware, profileController.getProfile)
 router.post('/refreshToken', authMiddleware, refreshController.refresh)
 router.post('/createPost', authMiddleware, postController.createPost)
+router.put('/likePost/:postId', authMiddleware, postController.likePost)
+
+router.get('/getPosts', authMiddleware, postController.getPosts)
 
 
 export default router;

@@ -75,5 +75,43 @@ export const postController = {
 
             res.status(201).json(document);
         });
+    },
+
+    async getPosts(req, res, next) {
+
+        // get all posts from database and return it to fontend
+        try {
+
+            const posts = await Post.find().select("-__v").sort('field -_id');
+
+            res.json({ posts })
+
+        } catch (error) {
+
+            return next(error);
+
+        }
+    },
+
+    async likePost(req, res, next) {
+
+        const userId = req.user._id;
+        console.log(userId)
+        console.log(req.params.postId)
+        let post = await Post.findOne({ _id: req.params.postId })
+        let likesarray = post.likes;
+
+        if (likesarray.includes(userId)) {
+            const index = likesarray.indexOf(userId);
+            if (index > -1) {
+                likesarray.splice(index, 1);
+            }
+        } else {
+            likesarray.push(userId)
+        }
+
+        let doc = await Post.findOneAndUpdate({ _id: req.params.postId }, { likes: likesarray }, { new: true })
+        console.log(doc)
+        res.json({ doc: doc })
     }
 }

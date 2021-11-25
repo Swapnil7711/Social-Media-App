@@ -29,6 +29,7 @@ db.once("open", () => {
 
 // for form data parsing
 // app.use(bodyParser())
+
 app.use(express.urlencoded({ extended: false }))
 app.use("/api", router)
 app.get('/', (req, res) => { res.send(("hello from social app best")) })
@@ -36,5 +37,6 @@ app.get('/', (req, res) => { res.send(("hello from social app best")) })
 
 // error handler middleware
 app.use(errorHandler)
+app.use('/api/uploads', express.static('uploads'));
 const PORT = process.env.PORT || APP_PORT
 app.listen(PORT, () => { console.log(`server running on port ${PORT}`) });
