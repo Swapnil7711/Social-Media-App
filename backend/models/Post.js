@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const postSchema = new Schema({
     postText: { type: String, required: false },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    likes: [{ type: Schema.Types.Object, ref: 'User' }],
+    comments: [{ type: Schema.Types.Object, ref: 'User' }],
     postImage: {
         type: String, required: false, get: (postImage) => {
             return `${APP_URL}/${postImage}`

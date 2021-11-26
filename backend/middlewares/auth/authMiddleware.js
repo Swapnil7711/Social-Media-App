@@ -13,11 +13,14 @@ const authMiddleware = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     try {
-        const { _id, email } = verifyJWT(token)
+        const { _id, email, firstName, lastName, profileUrl } = verifyJWT(token)
 
         const user = {
             _id,
-            email
+            email,
+            firstName,
+            lastName,
+            profileUrl
         }
 
         req.user = user;

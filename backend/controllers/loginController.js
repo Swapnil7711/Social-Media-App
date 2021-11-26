@@ -46,7 +46,7 @@ export const loginController = {
             }
 
             //  create tokens for user
-            const accessToken = signJWT({ _id: user._id, email: user.email })
+            const accessToken = signJWT({ _id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName, profileUrl: user.profileUrl })
             const refreshToken = signJWT({ _id: user._id, email: user.email }, "1y", REFRESHTOKEN_SECRET)
 
             // once refresh token created, store it in database

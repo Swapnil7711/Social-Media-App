@@ -73,7 +73,7 @@ export const registerController = {
 
 
             // genrate Access and Refresh Tokens after user saved
-            accessToken = signJWT({ _id: result._id, email: result.email })
+            accessToken = signJWT({ _id: result._id, email: result.email, firstName: result.firstName, lastName: result.lastName, profileUrl: result.profileUrl })
             refreshToken = signJWT({ _id: result._id, email: result.email }, "1y", REFRESHTOKEN_SECRET)
 
             // once refresh token created, store it in database

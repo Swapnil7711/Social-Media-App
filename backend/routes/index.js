@@ -15,6 +15,7 @@ router.get('/profile', authMiddleware, profileController.getProfile)
 router.post('/refreshToken', authMiddleware, refreshController.refresh)
 router.post('/createPost', authMiddleware, postController.createPost)
 router.put('/likePost/:postId', authMiddleware, postController.likePost)
+router.put('/postComment/:postId', authMiddleware, postController.postComments)
 
 router.get('/getPosts', authMiddleware, postController.getPosts)
 

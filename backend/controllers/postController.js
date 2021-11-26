@@ -96,22 +96,65 @@ export const postController = {
     async likePost(req, res, next) {
 
         const userId = req.user._id;
+
         console.log(userId)
-        console.log(req.params.postId)
         let post = await Post.findOne({ _id: req.params.postId })
         let likesarray = post.likes;
-
-        if (likesarray.includes(userId)) {
-            const index = likesarray.indexOf(userId);
-            if (index > -1) {
-                likesarray.splice(index, 1);
+        let bool = false
+        for (let i = 0; i < likesarray.length; i++) {
+            if (likesarray[i].userId === userId) {
+                likesarray.splice(i, 1);
+                bool = true
             }
-        } else {
-            likesarray.push(userId)
         }
+
+        if (!bool) {
+            likesarray.push({ userId: userId, firstName: req.user.firstName, lastName: req.user.lastName, profileUrl: req.user.profileUrl })
+        }
+
+
+        // if (likesarray.includes(userId)) {
+        //     const index = likesarray.indexOf(userId);
+        //     if (index > -1) {
+        //         likesarray.splice(index, 1);
+        //     }
+        // } else {
+        //     likesarray.push({ userId: userId, firstName: req.user.firstName, lastName: req.user.lastName, profileUrl: req.user.profileUrl })
+        // }
 
         let doc = await Post.findOneAndUpdate({ _id: req.params.postId }, { likes: likesarray }, { new: true })
         console.log(doc)
         res.json({ doc: doc })
+    },
+
+    async postComments(req, res, next) {
+
+        const commentSchema = Joi.object({
+            comment: Joi.string().required(),
+        })
+        console.log(req.body)
+        const { error } = commentSchema.validate(req.body);
+
+        if (error) {
+            return next(error)
+        }
+
+        const userId = req.user._id;
+
+        console.log(userId)
+
+        try {
+
+            let post = await Post.findOne({ _id: req.params.postId })
+            let commentsarray = post.comments;
+            commentsarray.push({ userId: userId, firstName: req.user.firstName, lastName: req.user.lastName, profileUrl: req.user.profileUrl, comment: req.body.comment })
+            let doc = await Post.findOneAndUpdate({ _id: req.params.postId }, { comments: commentsarray }, { new: true })
+            console.log(doc)
+            res.json({ doc: doc })
+
+        } catch (error) {
+            return next(new Error("DB error"))
+        }
+
     }
 }
