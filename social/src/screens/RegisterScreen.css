@@ -1,0 +1,110 @@
+.registerScreen {
+  background-color: var(--backgroundColor);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex: 1;
+  height: 100vh;
+  /* position: relative; */
+  width: 100%;
+}
+
+.registerScreenTitle {
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  flex: 0.5;
+  margin-top: 200px;
+  margin-left: 100px;
+  padding: 10px;
+  width: 40%;
+  height: auto;
+}
+
+.registerScreenTitle h1 {
+  color: var(--primaryColor);
+  font-size: 45px;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.registerScreen p {
+  color: black;
+  font-size: 30px;
+  font-weight: 400;
+  padding: 10px;
+}
+
+/* register screen form */
+
+.registerScreenForm {
+  background-color: white;
+  margin-right: 30px;
+  padding: 20px;
+  /* width: 25%; */
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 0.3;
+  margin-top: 150px;
+  height: 400px;
+  right: 200px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 80px #00ffff, -10px -10px 80px #00ffff;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nameSection {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.nameSection input {
+  padding: 10px;
+  width: 100%;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid;
+}
+#fname {
+  margin-right: 10px;
+}
+
+.inputItems {
+  width: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+.registerForm label {
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.registerForm p {
+  font-size: 10px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.signup {
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: var(--secondaryColor);
+  cursor: pointer;
+}

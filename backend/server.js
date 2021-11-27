@@ -5,6 +5,7 @@ import errorHandler from "./middlewares/errorhandler.js";
 import mongoose from "mongoose";
 import bodyParser from "body-parser"
 import path from "path"
+import cors from "cors"
 
 
 global.APP_ROOT = path.resolve()
@@ -28,14 +29,16 @@ db.once("open", () => {
 })
 
 // for form data parsing
-// app.use(bodyParser())
+app.use(cors())
 
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use("/api", router)
 app.get('/', (req, res) => { res.send(("hello from social app best")) })
 
 
 // error handler middleware
+
 app.use(errorHandler)
 app.use('/api/uploads', express.static('uploads'));
 const PORT = process.env.PORT || APP_PORT

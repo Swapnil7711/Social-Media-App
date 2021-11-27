@@ -1,4 +1,4 @@
-import joi from "joi"
+import Joi from "joi"
 import User from "../models/User.js"
 import CustomeErrorHandler from "../services/CustomErrorHanlder.js"
 import bcrypt from "bcrypt"
@@ -19,22 +19,25 @@ export const registerController = {
         // [ ] generate jwt token
         // [ ] send response
 
-        const registerSchema = joi.object({
-            firstName: joi.string().min(3).max(30).required(),
-            lastName: joi.string().required(),
-            email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-            dob: joi.date().required(),
-            password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-            confirmPassword: joi.ref('password')
+        const registerSchema = Joi.object({
+            firstName: Joi.string().min(3).max(30).required(),
+            lastName: Joi.string().required(),
+            email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+            dob: Joi.date(),
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+            confirmPassword: Joi.ref('password')
         });
 
         console.log(`body is ${JSON.stringify(req.body)}`)
 
         const { firstName, lastName, email, password, confirmPassword, dob } = req.body;
 
+        console.log(firstName, lastName, email, password, confirmPassword, dob)
+
         const { error } = registerSchema.validate({ firstName, lastName, email, password, confirmPassword, dob })
 
         if (error) {
+            console.log("error", error.message)
             return next(error)
         }
 
@@ -48,6 +51,7 @@ export const registerController = {
             }
 
         } catch (error) {
+
             return next(error)
         }
 
@@ -81,6 +85,7 @@ export const registerController = {
 
 
         } catch (error) {
+            console.log("error", error.message)
             return next(error)
         }
 
