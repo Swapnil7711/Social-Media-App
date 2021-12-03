@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import "./RegisterScreen.css"
 import { useSelector, useDispatch } from 'react-redux'
 import { registerUser } from "../AppState/reducers/authReducer.js"
@@ -6,8 +7,10 @@ import { registerUser } from "../AppState/reducers/authReducer.js"
 function RegisterScreen() {
 
     const auth = useSelector((state) => state.token)
-    console.log(auth.accessToken)
+    console.log(auth)
+    const { error, status } = auth
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const [firstName, setFirstname] = useState("");
     const [lastName, setLastName] = useState("");
@@ -79,17 +82,35 @@ function RegisterScreen() {
 
     }
 
+    const goToLoginScreen = () => {
+
+        navigate('/login');
+    }
+
+
+    useEffect(() => {
+        if (status === "success") {
+            navigate('/');
+        }
+    })
+
     return (
         <div className="registerScreen">
-            <div className="registerScreenTitle">
+            {/* <div className="registerScreenTitle">
                 <h1 >WELCOME TO SOCIAL</h1>
                 <p>Social helps you connect and share with the people in your life.</p>
-            </div>
+            </div> */}
+
+            <h1 className="h1class">WELCOME TO SOCIAL</h1>
+
             <div className="registerScreenForm">
+
                 <form className="registerForm">
+                    {error && (<p className="para">{error}</p>)}
                     <div className="nameSection">
                         <input type="text" id="fname" name="firstName" onChange={first_nameHandler} placeholder="First Name" />
                         <input type="text" id="lname" name="lastName" onChange={last_nameHandler} placeholder="Last Name" />
+
                     </div>
                     <input className="inputItems" placeholder="Email" type="email" id="email" onChange={emailHandler} name="email" />
                     <input className="inputItems" placeholder="Password" type="password" id="password" onChange={passwordHandler} name="password" />
@@ -98,9 +119,12 @@ function RegisterScreen() {
                     <input className="inputItems" type="date" id="birthday" onChange={date_of_birthHandler} name="birthday"></input>
                     <p>By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.</p>
                     <button className="signup" onClick={handleRegisterUser}>Sign Up</button>
+                    <h4 className="regScreen_h4">Already have an account? <span onClick={goToLoginScreen}>Sign In</span></h4>
                 </form>
+
             </div>
-        </div>
+
+        </div >
     )
 }
 

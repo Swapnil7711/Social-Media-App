@@ -1,16 +1,18 @@
 .registerScreen {
-  background-color: var(--backgroundColor);
+  background-image: url("../static/images/2664275.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   flex: 1;
   height: 100vh;
-  /* position: relative; */
   width: 100%;
 }
 
 .registerScreenTitle {
-  /* position: absolute; */
   display: flex;
   flex-direction: column;
   flex: 0.5;
@@ -37,21 +39,30 @@
 
 /* register screen form */
 
+.h1class {
+  color: var(--primaryColor);
+  font-size: 65px;
+  font-weight: 700;
+  padding: 10px;
+}
+
 .registerScreenForm {
   background-color: white;
-  margin-right: 30px;
-  padding: 20px;
+  opacity: 0.9;
+  /* margin-right: 30px */
+  padding: 50px 20px 30px 20px;
   /* width: 25%; */
-  /* position: absolute; */
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex: 0.3;
-  margin-top: 150px;
+  margin-top: 50px;
   height: 400px;
-  right: 200px;
-  border-radius: 10px;
-  box-shadow: 10px 10px 80px #00ffff, -10px -10px 80px #00ffff;
+  /* right: 200px; */
+  border-radius: 15px;
+  width: 25%;
+  box-shadow: 20px 20px 40px #a4a4a4, -20px -20px 40px #ffffff;
 }
 
 .registerForm {
@@ -72,7 +83,7 @@
   width: 100%;
   font-size: 15px;
   border-radius: 5px;
-  border: 1px solid;
+  border: 1px solid gray;
 }
 #fname {
   margin-right: 10px;
@@ -84,7 +95,7 @@
   padding: 10px;
   font-size: 15px;
   border-radius: 5px;
-  border: 1px solid;
+  border: 1px solid gray;
 }
 
 .registerForm label {
@@ -107,4 +118,28 @@
   color: white;
   background-color: var(--secondaryColor);
   cursor: pointer;
+}
+
+.regScreen_h4 {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 5px;
+  align-self: center;
+  padding: 10px;
+}
+
+.regScreen_h4 span {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+
+.para {
+  position: absolute;
+  top: 0px;
+  color: red !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  align-self: center;
 }
